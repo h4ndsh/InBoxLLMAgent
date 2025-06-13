@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aviso de Tentativa de Phishing</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            background-color: #d32f2f;
+            color: #ffffff;
+            padding: 10px;
+            text-align: center;
+            border-radius: 8px 8px 0 0;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+        .content {
+            padding: 20px;
+        }
+        .content h2 {
+            color: #d32f2f;
+            font-size: 20px;
+        }
+        .content p {
+            margin: 10px 0;
+        }
+        .warning {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffca28;
+            padding: 10px;
+            margin: 15px 0;
+        }
+        .details {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+        .details p {
+            margin: 5px 0;
+        }
+        .footer {
+            text-align: center;
+            font-size: 14px;
+            color: #666;
+            margin-top: 20px;
+            border-top: 1px solid #ddd;
+            padding-top: 10px;
+        }
+        .button {
+            display: inline-block;
+            background-color: #d32f2f;
+            color: #ffffff;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 15px;
+        }
+        .button:hover {
+            background-color: #b71c1c;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚨 Aviso de Tentativa de Phishing 🚨</h1>
+            <strong><p>Esta análise foi gerada de forma automática e é importante que tome precauções para proteger as suas informações pessoais.</p></strong>
+        </div>
+        <div class="content">
+            <h2>Detetámos uma tentativa de phishing!</h2>
+
+            <p>Identificámos um email suspeito que pode representar uma ameaça à sua segurança. Este email foi classificado como phishing com $confidence% de confiança, com base em indicadores de comportamento malicioso.</p>
+            <div class="warning">
+                <p><strong>Não clique em links nem forneça informações pessoais!</strong> <br> $reasons</p>
+            </div>
+
+            <div class="details">
+                <h3>Detalhes do Email Suspeito:</h3>
+                <p><strong>Assunto:</strong> $subject</p>
+                <p><strong>De:</strong> $from</p>
+                <p><strong>Data:</strong> $date</p>
+                <p><strong>Links:</strong></p>
+                <ul>
+                    $urls
+                </ul>
+                <p><strong>Domínios Encontrados:</strong> $domains</p>
+            </div>
+
+            <p><strong>O que deve fazer?</strong></p>
+            <ul>
+                <li>Não clique em nenhum link presente no email suspeito.</li>
+                <li>Não forneça informações pessoais, como credenciais</li>
+                <li>Se já clicou em algum link, altere imediatamente suas credenciai administrador de TI.</li>
+                <li>Caso tenha dúvidas, encaminhe o email suspeito para <a href="mailto:$to">$to</a> para uma análise adicional.</li>
+            </ul>
+            <center>
+                <a href="https://www.fefal.pt/seguranca" class="button">Saiba Mais Sobre Segurança Online</a>
+            </center>
+        </div>
+        <div class="footer">
+            <p>Este é um email automático da FEFAL.</p>
+            <p>© 2025 FEFAL. Todos os direitos reservados.</p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,6 @@
+python-dotenv
+cryptography
+schedule
+requests
+bs4
+dkimpy
