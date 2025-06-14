@@ -106,7 +106,7 @@ Before you begin, ensure you have:
 
 ### 🐳 **Docker**
 
-**Status:** 🚧 *Not implemented*
+🚧 *Not implemented*
 
 ## ⚠️ Important Notes
 
