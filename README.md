@@ -30,7 +30,6 @@ In an era where email overload is a daily struggle and privacy concerns are para
 
 ## ✨ Features
 
-### 🗺️ **Project Roadmap**
 | Feature | Description | Status |
 |---------|-------------|--------|
 | 📥 **Email Reading** | Reads and extracts `.eml` files from the inbox | ✅ |
