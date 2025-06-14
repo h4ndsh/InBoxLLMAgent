@@ -1,5 +1,4 @@
 <div align="center">
-  <h1>INBOX LLM Agent</h1>
   <img src="banner.jpg" alt="InBoxLLMAgent Banner" width="70%" height="auto"/>
 </div>
 <div align="center">
@@ -14,6 +13,8 @@
 [![Ollama](https://img.shields.io/badge/Ollama-000000?style=for-the-badge&logo=llama&logoColor=white)](https://ollama.ai/)
 
 </div>
+
+# INBOX LLM Agent
 
 **INBOX LLM Agent** is an open-source experimental project that reimagines email management through the power of local Large Language Models (LLMs). Designed as a privacy-first Proof of Concept, it processes emails entirely offline, combining AI automation with full user control.
 
