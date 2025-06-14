@@ -1,5 +1,5 @@
 <div align="center">
-  # INBOX LLM Agent
+  <h1>INBOX LLM Agent</h1>
   <img src="banner.jpg" alt="InBoxLLMAgent Banner" width="70%" height="auto"/>
 </div>
 <div align="center">
