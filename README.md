@@ -83,7 +83,7 @@ Before you begin, ensure you have:
    ollama serve
    
    # Pull your preferred model (choose one)
-   ollama pull gemma3:latest        # Meta's LLaMA 3.2
+   ollama pull gemma3:latest
    ```
 
 4. **Configure your settings**
