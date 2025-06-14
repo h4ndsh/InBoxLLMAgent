@@ -19,9 +19,9 @@
 **INBOX LLM Agent** is an open-source experimental project that reimagines email management through the power of local Large Language Models (LLMs). Designed as a privacy-first Proof of Concept, it processes emails entirely offline, combining AI automation with full user control.
 
 
-## 🌟 Why INBOX LLM Agent?
+## 🌟 Why?
 
-In an era where email overload is a daily struggle and privacy concerns are paramount, INBOX LLM Agent offers a unique solution:
+In an era where email overload is a daily struggle and privacy concerns are paramount.
 
 - **Complete Privacy**: Your emails never leave your device - no cloud APIs, no data sharing
 - **AI-Powered Intelligence**: Leverages cutting-edge local LLMs for smart email processing
