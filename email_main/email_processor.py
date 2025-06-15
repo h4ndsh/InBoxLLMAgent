@@ -19,7 +19,7 @@ class EmailProcessor:
         self.emails_folder = os.getenv("INBOX_EML_FOLDER")
         self.processed_folder = os.getenv("INBOX_PROCESSED_FOLDER")
         self.sql_manager = SQLManager()
-        self.interval = int(os.getenv("INBOX_CHECK_INTERVAL"))
+        self.interval = int(os.getenv("WAIT_INTERVAL_LLM"))
         self.running = True
         self.stop_event = threading.Event()
         self._processing = False 
