@@ -1,15 +1,15 @@
 # INBOX LLM Agent
 
 <div align="center">
-  <img src="readme/banner.jpg" alt="InBoxLLMAgent Banner" width="80%" height="auto"/>
+  <img src="readme/banner.jpg" alt="ILLMA Banner" width="80%" height="auto"/>
 </div>
 <div align="center">
 
-![GitHub stars](https://img.shields.io/github/stars/h4ndsh/InBoxLLMAgent?style=social)
-![GitHub forks](https://img.shields.io/github/forks/h4ndsh/InBoxLLMAgent?style=social)
-![GitHub watchers](https://img.shields.io/github/watchers/h4ndsh/InBoxLLMAgent?style=social)
-![GitHub issues](https://img.shields.io/github/issues/h4ndsh/InBoxLLMAgent)
-![GitHub pull requests](https://img.shields.io/github/issues-pr/h4ndsh/InBoxLLMAgent)
+![GitHub stars](https://img.shields.io/github/stars/h4ndsh/ILLMA?style=social)
+![GitHub forks](https://img.shields.io/github/forks/h4ndsh/ILLMA?style=social)
+![GitHub watchers](https://img.shields.io/github/watchers/h4ndsh/ILLMA?style=social)
+![GitHub issues](https://img.shields.io/github/issues/h4ndsh/ILLMA)
+![GitHub pull requests](https://img.shields.io/github/issues-pr/h4ndsh/ILLMA)
 
 [![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
 [![Ollama](https://img.shields.io/badge/Ollama-000000?style=for-the-badge&logo=llama&logoColor=white)](https://ollama.ai/)
@@ -71,8 +71,8 @@ Before you begin, ensure you have:
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/h4ndsh/InBoxLLMAgent.git
-   cd InBoxLLMAgent
+   git clone https://github.com/h4ndsh/ILLMA.git
+   cd ILLMA
    ```
 
 2. **Set up Python environment**
@@ -139,7 +139,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 <div align="center">
 
-**[⭐ Star this repo](https://github.com/h4ndsh/InBoxLLMAgent)** • **[🐛 Report Bug](https://github.com/h4ndsh/InBoxLLMAgent/issues)** • **[💡 Request Feature](https://github.com/h4ndsh/InBoxLLMAgent/issues)**
+**[⭐ Star this repo](https://github.com/h4ndsh/ILLMA)** • **[🐛 Report Bug](https://github.com/h4ndsh/ILLMA/issues)** • **[💡 Request Feature](https://github.com/h4ndsh/ILLMA/issues)**
 
 *Built with ❤️*
 
