@@ -128,7 +128,7 @@ class EmailProcessor:
             indicators = self.extract_indicators(components['body'])
             indicators['dkim'] = dkim_ok
             
-            if os.getenv("GOOGLE_SAFE_BROWSING_ENABLED"):
+            if os.getenv("GOOGLE_SAFE_BROWSING_ENABLED").lower() == "true":
                 for url in indicators['urls']:
                     try:
                         result = URLProcessor.google_safe_browsing(
@@ -181,7 +181,7 @@ class EmailProcessor:
 
             self.sql_manager.save_analysis(analysis_data)
 
-            if os.getenv("SEND_EMAIL_ALERTS"):
+            if os.getenv("SEND_EMAIL_ALERTS").lower() == "true":
                 if analysis_data['llm']['response'].get('verdict') == 'phishing':
                     try:
                         EmailSender.send_email(

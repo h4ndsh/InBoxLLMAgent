@@ -24,7 +24,7 @@ class EmailMonitor:
         try:
             logging.debug(f"Connecting to {os.getenv("INBOX_SERVER")}:{os.getenv("INBOX_PORT")} (SSL: {os.getenv("INBOX_SSL")})")
             
-            if os.getenv("INBOX_SSL"):
+            if os.getenv("INBOX_SSL").lower() == "true":
                 self.imap_conn = imaplib.IMAP4_SSL(
                     os.getenv("INBOX_SERVER"), 
                     os.getenv("INBOX_PORT")
