@@ -40,19 +40,19 @@ def generate_phishing_warning(json_data, template_name):
     template = template.replace('$emails', emails_html if emails else None)
     return template, to_email
 
-def send_email(config, subject, html_sender):
+def send_email(subject, html_sender):
     """Envia um email usando SMTP com o corpo em HTML."""
     try:
         body, to_address = html_sender
         msg = MIMEText(body, 'html')
         msg['Subject'] = subject
-        msg['From'] = config['sender_email']['email']
+        msg['From'] = os.getenv("SENDER_EMAIL")
         msg['To'] = to_address
         
         # Conectar ao servidor SMTP
-        with smtplib.SMTP(config['sender_email']['server'], config['sender_email']['port']) as server:
+        with smtplib.SMTP(os.getenv("SENDER_SERVER"), os.getenv("SENDER_PORT")) as server:
             server.starttls()
-            server.login(config['sender_email']['username'], config['sender_email']['password'])
+            server.login(os.getenv("SENDER_USERNAME"), os.getenv("SENDER_PASSWORD"))
             server.sendmail(msg['From'], [msg['To']], msg.as_string())
             logging.debug(f"Email enviado para {to_address}")
     except Exception as e:

@@ -46,7 +46,7 @@ In an era where email overload is a daily struggle and privacy concerns are para
 | 📊 **Batch Processing** | Efficient processing of large volumes of emails | ❌ |
 | 🔐 **Enhanced Security** | Advanced credential and secret management | ❌ |
 | 🖼️ **URL Screenshot Capture** | Captures screenshots of webpages linked in suspicious emails | ❌ |
-| 🔍 **OCR on Screenshots** | Applies OCR (e.g., Tesseract) to extract visible text from captured images | ❌ |
+| 🔍 **OCR on Images** | Applies OCR (e.g., Tesseract) to extract visible text from captured images | ❌ |
 | 🧠 **Computer Vision Analysis** | Uses models like ViT or CLIP to detect suspicious visual elements (e.g., fake logos) | ❌ |
 | 🔗 **Multimodal Contextualization** | Combines text, screenshots, domains, and metadata for integrated analysis | ❌ |
 | 📚 **Continual Learning** | System learns from previous analyses using supervised feedback | ❌ |
@@ -97,10 +97,10 @@ Before you begin, ensure you have:
 4. **Configure your settings**
    ```bash
    # Copy example configuration
-   cp env.json.example env.json
+   cp env.example .env
    ```
    
-   Edit `env.json` with your credentials
+   Edit `.env` with your credentials
 
 5. **Launch the application**
    ```bash

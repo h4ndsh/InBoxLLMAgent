@@ -6,3 +6,4 @@ env.json
 *.sql
 venv
 *.log
+.env

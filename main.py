@@ -1,32 +1,18 @@
-import json
+import dotenv
 import argparse
 import logging
-import os
+from pathlib import Path
 from email_main.email_processor import EmailProcessor
 from email_main.email_monitor import EmailMonitor
 import threading
 
-def load_env_variables(env_file='env.json'):
-    #read environment configuration
-    if not os.path.exists(env_file):
-        logging.error(f"Environment configuration file '{env_file}' not found.")
-        raise FileNotFoundError(f"Environment configuration file '{env_file}' not found.")
-    with open(env_file, 'r') as f:
-        env_config = json.load(f)
-    
-    # Create emails folder if it doesn't exist
-    if not os.path.exists(env_config["inbox_email"]["eml_folder"]):
-        os.makedirs(env_config["inbox_email"]["eml_folder"])
-    return env_config
-
-
 def main():
-    # Configurar o parser de argumentos
+    # Set up the argument parser
     parser = argparse.ArgumentParser(description="Email Processing Script")
     parser.add_argument('--verbose', action='store_true', help='Enable verbose logging (DEBUG level)')
     args = parser.parse_args()
 
-    # Configurar o logging com base no argumento --verbose
+    # Set up logging based on the --verbose argument
     log_level = logging.DEBUG if args.verbose else logging.INFO
     logging.basicConfig(
         level=log_level,
@@ -37,20 +23,24 @@ def main():
         ]
     )
 
-    # Log para confirmar o nível de logging
+    # Log to confirm the logging level
     logging.info(f"Logging level set to: {logging.getLevelName(logging.getLogger().level)}")
 
-    # Carregar a configuração
-    config = load_env_variables()
-    if not config:
-        logging.error("Não foi possível carregar a configuração")
-        return
+    # Path to .env file
+    env_path = Path(".env")
+
+    # Check if .env exists before loading
+    if env_path.is_file():
+        dotenv.load_dotenv(dotenv_path=env_path)
+    else:
+        logging.ERROR(".env file not found. Exiting")
+        exit(1)
     
-    # Instanciar EmailProcessor e EmailMonitor
-    email_processor = EmailProcessor(config)
-    email_monitor = EmailMonitor(config)
+    # Instantiate EmailProcessor and EmailMonitor
+    email_processor = EmailProcessor()
+    email_monitor = EmailMonitor()
     
-    # Iniciar threads
+    # Start threads
     email_monitor_thread = threading.Thread(target=email_monitor.start_schedule)
     email_processor_thread = threading.Thread(target=email_processor.start)
     
@@ -58,7 +48,7 @@ def main():
         email_processor_thread.start()
         email_monitor_thread.start()
         
-        # Aguardar threads terminarem
+        # Wait for threads to finish
         email_processor_thread.join()
         email_monitor_thread.join()
         
@@ -67,7 +57,7 @@ def main():
         email_processor.stop()
         email_monitor.stop()
         
-        # Aguardar threads terminarem graciosamente
+        # Wait for threads to finish gracefully
         email_processor_thread.join(timeout=5)
         email_monitor_thread.join(timeout=5)
         

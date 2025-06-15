@@ -15,15 +15,14 @@ from urllib.parse import urlparse
 import threading
 
 class EmailProcessor:
-    def __init__(self, config):
-        self.emails_folder = config["inbox_email"]["eml_folder"]
-        self.processed_folder = config["inbox_email"]["processed_folder"]
-        self.config = config
+    def __init__(self):
+        self.emails_folder = os.getenv("INBOX_EML_FOLDER")
+        self.processed_folder = os.getenv("INBOX_PROCESSED_FOLDER")
         self.sql_manager = SQLManager()
-        self.interval = config["inbox_email"]["interval"]
+        self.interval = int(os.getenv("INBOX_CHECK_INTERVAL"))
         self.running = True
         self.stop_event = threading.Event()
-        self._processing = False  # Controlar processamento concorrente
+        self._processing = False 
         
         # Create processed folder if it does not exist
         os.makedirs(self.processed_folder, exist_ok=True)
@@ -120,7 +119,7 @@ class EmailProcessor:
 
             email_message = BytesParser(policy=policy.default).parsebytes(raw_email)
             components = self.extract_email_components(raw_email)
-            dkim_ok = DKIMProcessor.dkim_passes_from_bytes(raw_email, self.config.get("dkim", {}).get("enabled", False))
+            dkim_ok = DKIMProcessor.dkim_passes_from_bytes(raw_email, os.getenv("DKIM_ENABLED"))
             
             if not components:
                 logging.warning(f"Could not extract components from {filename}")
@@ -129,12 +128,12 @@ class EmailProcessor:
             indicators = self.extract_indicators(components['body'])
             indicators['dkim'] = dkim_ok
             
-            if self.config.get("google_safe_browsing", {}).get("enabled", False):
+            if os.getenv("GOOGLE_SAFE_BROWSING_ENABLED"):
                 for url in indicators['urls']:
                     try:
                         result = URLProcessor.google_safe_browsing(
                             url=url,
-                            api_key=self.config.get("google_safe_browsing", {}).get("api_key")
+                            api_key=os.getenv("GOOGLE_SAFE_BROWSING_API_KEY")
                         )
                         if result["matches"]:
                             indicators['google_safe_browsing'][url] = result["matches"]
@@ -150,11 +149,11 @@ class EmailProcessor:
                     'body': body_without_urls
                 },
                 indicators=indicators,
-                ollama_api_url=self.config['ollama']['url'],
-                model=self.config['ollama']['model'],
-                auth_token=self.config['ollama']['auth_token'],
-                stream=self.config['ollama']['stream'],
-                language=self.config['ollama']['response_language']
+                ollama_api_url=os.getenv("OLLAMA_URL"),
+                model=os.getenv("OLLAMA_MODEL"),
+                auth_token=os.getenv("OLLAMA_AUTH_TOKEN"),
+                stream=os.getenv("OLLAMA_STREAM", "false").lower() == "true",
+                language=os.getenv("OLLAMA_RESPONSE_LANGUAGE")
             )
 
             analysis_data = {
@@ -168,7 +167,7 @@ class EmailProcessor:
                 'indicators': indicators,
                 'size': size,
                 'llm': {
-                    'model': self.config['ollama']['model'],
+                    'model': os.getenv("OLLAMA_MODEL"),
                     'response': result,
                     'duration': duration
                 }
@@ -182,15 +181,14 @@ class EmailProcessor:
 
             self.sql_manager.save_analysis(analysis_data)
 
-            if self.config.get("send_alerts", False):
+            if os.getenv("SEND_EMAIL_ALERTS"):
                 if analysis_data['llm']['response'].get('verdict') == 'phishing':
                     try:
                         EmailSender.send_email(
-                            config=self.config,
                             subject=f"Phishing Alert: {analysis_data['subject']}",
                             html_sender=EmailSender.generate_phishing_warning(
                                 json_data=analysis_data,
-                                template_name=os.path.join(self.config["alert_template"])
+                                template_name=os.path.join(os.getenv("ALERT_TEMPLATE"))
                             )
                         )
                     except Exception as e:

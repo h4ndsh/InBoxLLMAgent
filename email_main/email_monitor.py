@@ -9,13 +9,12 @@ from datetime import datetime
 import threading
 
 class EmailMonitor:
-    def __init__(self, config):
-        self.config = config
+    def __init__(self):
         self.imap_conn = None
-        self.max_threads = config.get('max_threads', 5)
-        self.interval = config["inbox_email"]["interval"]
+        self.max_threads = int(os.getenv("MAX_THREADS", 2))
+        self.interval = int(os.getenv("INBOX_CHECK_INTERVAL"))
         self.executor = ThreadPoolExecutor(max_workers=self.max_threads)
-        self.emails_folder = config["inbox_email"]['eml_folder']
+        self.emails_folder = os.getenv("INBOX_EML_FOLDER")
         self.running = True
         self.stop_event = threading.Event()
         self.connection_established = False
@@ -23,23 +22,23 @@ class EmailMonitor:
     def connect_imap(self):
         """Establish IMAP connection to email server"""
         try:
-            logging.debug(f"Connecting to {self.config['inbox_email']['server']}:{self.config['inbox_email']['port']} (SSL: {self.config['inbox_email']['ssl']})")
+            logging.debug(f"Connecting to {os.getenv("INBOX_SERVER")}:{os.getenv("INBOX_PORT")} (SSL: {os.getenv("INBOX_SSL")})")
             
-            if self.config["inbox_email"]['ssl']:
+            if os.getenv("INBOX_SSL"):
                 self.imap_conn = imaplib.IMAP4_SSL(
-                    self.config["inbox_email"]['server'], 
-                    self.config["inbox_email"]['port']
+                    os.getenv("INBOX_SERVER"), 
+                    os.getenv("INBOX_PORT")
                 )
             else:
                 self.imap_conn = imaplib.IMAP4(
-                    self.config["inbox_email"]['server'], 
-                    self.config["inbox_email"]['port']
+                    os.getenv("INBOX_SERVER"), 
+                    os.getenv("INBOX_PORT")
                 )
                 self.imap_conn.starttls()
             
             self.imap_conn.login(
-                self.config["inbox_email"]['username'], 
-                self.config["inbox_email"]['password']
+                os.getenv("INBOX_USERNAME"), 
+                os.getenv("INBOX_PASSWORD")
             )
             
             self.imap_conn.select('INBOX')

@@ -51,6 +51,7 @@ def extract_json(text):
             return None
     return None
 
+
 def check_phishing(content, indicators, ollama_api_url, model, auth_token, stream, language):
     prompt = build_prompt(content, indicators, language)
     
@@ -64,9 +65,14 @@ def check_phishing(content, indicators, ollama_api_url, model, auth_token, strea
 
     payload = {
         "model": model,
-        "prompt": prompt,
-        "stream": stream
+        "prompt": prompt
     }
+
+    if stream:
+        payload["stream"] = True
+    else:
+        payload["stream"] = False
+
     # get size of the payload in kb
     payload_size_kb = len(json.dumps(payload).encode('utf-8')) / 1024
     
@@ -83,4 +89,4 @@ def check_phishing(content, indicators, ollama_api_url, model, auth_token, strea
         return parsed if parsed else raw_result, end_time - start_time, payload_size_kb
 
     except Exception as e:
-        return f"Error contacting Ollama API: {e}", None
+        return f"Error contacting Ollama API: {e}", None, None
