@@ -190,7 +190,7 @@ class EmailProcessor:
                             subject=f"Phishing Alert: {analysis_data['subject']}",
                             html_sender=EmailSender.generate_phishing_warning(
                                 json_data=analysis_data,
-                                template_path=os.path.join(self.config["template_path"], "alert.html")
+                                template_name=os.path.join(self.config["alert_template"])
                             )
                         )
                     except Exception as e:
